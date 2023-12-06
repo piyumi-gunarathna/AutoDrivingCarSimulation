@@ -47,6 +47,64 @@ public class CarTests
         Assert.Equal(expectedX, car.Position.X);
         Assert.Equal(expectedY, car.Position.Y);
     }
+
+    [Fact]
+    public void Car_MoveForward_ShouldNotMove_WhenInitialPositionYIsZeroAndDirectionIsSouth()
+    {
+        // Arrange
+        var car = new Car(2, 0, Direction.South);
+        var feild = new Field(10,10);
+
+        // Act
+        car.MoveForward(feild);
+
+        // Assert
+        Assert.Equal(car.Position?.Y, 0);
+    }
+
+
+    [Fact]
+    public void Car_MoveForward_ShouldNotMove_WhenInitialPositionXIsZeroAndDirectionIsWest()
+    {
+        // Arrange
+        var car = new Car(0, 1, Direction.West);
+        var feild = new Field(10, 10);
+
+        // Act
+        car.MoveForward(feild);
+
+        // Assert
+        Assert.Equal(car.Position?.X, 0);
+    }
+
+    [Fact]
+    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedFeildWidth()
+    {
+        // Arrange
+        var car = new Car(9, 1, Direction.South);
+        var feild = new Field(10, 10);
+
+        // Act
+        car.MoveForward(feild);
+
+        // Assert
+        Assert.Equal(car.Position?.X, 9);
+    }
+
+    [Fact]
+    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedFeildHeight()
+    {
+        // Arrange
+        var car = new Car(6, 9, Direction.North);
+        var feild = new Field(10, 10);
+
+        // Act
+        car.MoveForward(feild);
+
+        // Assert
+        Assert.Equal(car.Position?.Y, 9);
+    }
+
 }
 
 
