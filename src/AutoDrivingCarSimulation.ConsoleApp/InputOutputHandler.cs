@@ -7,7 +7,7 @@ public static class InputOutputHandler
 {
     public static FieldDTO? GetFieldDimensions()
     {
-        Console.WriteLine(Constants.ENTER_CAR_STATUS);
+        Console.WriteLine(Constants.ENTER_FIELD_DIMENTION);
         string[] fieldInput = ReadInput();
 
         if (fieldInput != null && fieldInput.Length == 2 &&
@@ -24,7 +24,7 @@ public static class InputOutputHandler
 
     public static CarDTO? GetCarInitialPosition()
     {
-        Console.WriteLine();
+        Console.WriteLine(Constants.ENTER_CAR_STATUS);
         string[] carPositionAndDirection = ReadInput();
 
         if (carPositionAndDirection != null && carPositionAndDirection.Length == 3 &&
@@ -50,6 +50,7 @@ public static class InputOutputHandler
     {
         if (movedCarInfo != null)
         {
+            Console.WriteLine(Constants.CAR_STATUS_DETAILS);
             Console.WriteLine($"{movedCarInfo.X} {movedCarInfo.Y} {movedCarInfo.Direction}");
         }
     }

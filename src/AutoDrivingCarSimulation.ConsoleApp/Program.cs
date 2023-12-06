@@ -30,3 +30,5 @@ do
     }
 }
 while (Console.ReadLine()?.ToUpper() == Constants.YES_RESTART);
+
+Console.WriteLine(Constants.EXITING);

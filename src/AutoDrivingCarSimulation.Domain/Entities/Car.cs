@@ -11,7 +11,7 @@ public class Car
 
     public Car(int x, int y, Direction facingDirection)
     {
-        if (x <= 0 || y <= 0)
+        if (x < 0 || y < 0)
         {
             throw new AutoDrivingCarSimulationException(Constants.CAR_POSITION_ERROR);
         }
@@ -46,9 +46,11 @@ public class Car
             case Direction.East:
                 return new Coordinates(Position.X + 1, Position.Y);
             case Direction.South:
-                return new Coordinates(Position.X, Position.Y - 1);
+                int newY = Position.Y - 1 >= 0 ? Position.Y - 1 : 0;
+                return new Coordinates(Position.X, newY);
             case Direction.West:
-                return new Coordinates(Position.X - 1, Position.Y);
+                int newX = Position.X - 1 >= 0 ? Position.X - 1 : 0;
+                return new Coordinates(newX, Position.Y);
             default:
                 throw new AutoDrivingCarSimulationException(Constants.INVALID_DIRECTION);
         }
@@ -56,14 +58,10 @@ public class Car
 
     private Coordinates AdjustPosition(Coordinates position, Field field)
     {
-        if (position.X < 0)
-            position.X = 0;
-        else if (position.X >= field.Width)
+        if (position.X >= field.Width)
             position.X = field.Width - 1;
 
-        if (position.Y < 0)
-            position.Y = 0;
-        else if (position.Y >= field.Height)
+        if (position.Y >= field.Height)
             position.Y = field.Height - 1;
         return position;
     }

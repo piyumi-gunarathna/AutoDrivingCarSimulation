@@ -1,4 +1,5 @@
 ﻿using AutoDrivingCarSimulation.Domain.Entities;
+using AutoDrivingCarSimulation.Domain.Exceptions;
 using AutoDrivingCarSimulation.Domain.ValueObjects;
 
 namespace AutoDrivingCarSimulation.Tests.Domain;
@@ -32,13 +33,13 @@ public class CarTests
     }
 
     [Theory]
-    [InlineData(Direction.North, 0, 0, 0, 1)] 
-    [InlineData(Direction.East, 0, 0, 1, 0)]  
+    [InlineData(Direction.North, 0, 0, 0, 1)]
+    [InlineData(Direction.East, 0, 0, 1, 0)]
     public void Car_MoveForward_ShouldChangePosition(Direction direction, int initialX, int initialY, int expectedX, int expectedY)
     {
         // Arrange
         var car = new Car(initialX, initialY, direction);
-        var field = new Field(10, 10); 
+        var field = new Field(10, 10);
 
         // Act
         car.MoveForward(field);
@@ -53,58 +54,61 @@ public class CarTests
     {
         // Arrange
         var car = new Car(2, 0, Direction.South);
-        var feild = new Field(10,10);
+        var field = new Field(10, 10);
 
         // Act
-        car.MoveForward(feild);
+        car.MoveForward(field);
 
         // Assert
-        Assert.Equal(car.Position?.Y, 0);
+        Assert.Equal(0, car.Position?.Y);
     }
-
 
     [Fact]
     public void Car_MoveForward_ShouldNotMove_WhenInitialPositionXIsZeroAndDirectionIsWest()
     {
         // Arrange
         var car = new Car(0, 1, Direction.West);
-        var feild = new Field(10, 10);
+        var field = new Field(10, 10);
 
         // Act
-        car.MoveForward(feild);
+        car.MoveForward(field);
 
         // Assert
-        Assert.Equal(car.Position?.X, 0);
+        Assert.Equal(0, car.Position?.X);
     }
 
     [Fact]
-    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedFeildWidth()
+    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedsFieldWidth()
     {
         // Arrange
         var car = new Car(9, 1, Direction.South);
-        var feild = new Field(10, 10);
+        var field = new Field(10, 10);
 
         // Act
-        car.MoveForward(feild);
+        car.MoveForward(field);
 
         // Assert
-        Assert.Equal(car.Position?.X, 9);
+        Assert.Equal(9, car.Position?.X);
     }
 
     [Fact]
-    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedFeildHeight()
+    public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedsFieldHeight()
     {
         // Arrange
         var car = new Car(6, 9, Direction.North);
-        var feild = new Field(10, 10);
+        var field = new Field(10, 10);
 
         // Act
-        car.MoveForward(feild);
+        car.MoveForward(field);
 
         // Assert
-        Assert.Equal(car.Position?.Y, 9);
+        Assert.Equal(9, car.Position?.Y);
     }
 
+    [Fact]
+    public void Car_CreateInstance_ShouldThrowException_WhenCoordinatesAreNegative()
+    {
+        // Act & Assert
+        Assert.Throws<AutoDrivingCarSimulationException>(() => new Car(-1, -3, Direction.North));
+    }
 }
-
-
