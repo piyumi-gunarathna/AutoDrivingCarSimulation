@@ -2,7 +2,7 @@
 
 namespace AutoDrivingCarSimulation.Tests.EndToEnd;
 
-public class EndToEndTests
+public class AutoDrivingCarE2ETests
 {
     [Fact]
     public void TestEndToEndSimulation()

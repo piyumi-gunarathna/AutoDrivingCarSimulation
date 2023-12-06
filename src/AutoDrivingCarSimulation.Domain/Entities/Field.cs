@@ -12,7 +12,7 @@ public class Field
     {
         if (width <= 0 || height <= 0)
         {
-            throw new AutoDrivingCarSimulationException(Constants.FIELD_DIMENSTION_ERROR);
+            throw new AutoDrivingCarException(Constants.FIELD_DIMENSTION_ERROR);
         }
 
         Width = width;
