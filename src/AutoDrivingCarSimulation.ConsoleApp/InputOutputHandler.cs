@@ -1,12 +1,11 @@
 ﻿using AutoDrivingCarSimulation.Application.DTOs;
-using AutoDrivingCarSimulation.Application.Services;
 using AutoDrivingCarSimulation.Shared;
 
 namespace AutoDrivingCarSimulation.ConsoleApp;
 
 public static class InputOutputHandler
 {
-    public static FieldDTO GetFieldDimensions()
+    public static FieldDTO? GetFieldDimensions()
     {
         Console.WriteLine(Constants.ENTER_CAR_STATUS);
         string[] fieldInput = ReadInput();
@@ -23,7 +22,7 @@ public static class InputOutputHandler
         }
     }
 
-    public static CarDTO GetCarInitialPosition()
+    public static CarDTO? GetCarInitialPosition()
     {
         Console.WriteLine();
         string[] carPositionAndDirection = ReadInput();
@@ -44,7 +43,7 @@ public static class InputOutputHandler
     public static string GetCommandInput()
     {
         Console.WriteLine(Constants.ENTER_COMMANDS);
-        return Console.ReadLine();
+        return Console.ReadLine()?? string.Empty;
     }
 
     public static void DisplayFinalPosition(CarDTO movedCarInfo)
@@ -57,7 +56,7 @@ public static class InputOutputHandler
 
     private static string[] ReadInput()
     {
-        return  Console.ReadLine()?.Split(' ');
+        return (Console.ReadLine() ?? string.Empty).Split(' ');
     }
 }
 
