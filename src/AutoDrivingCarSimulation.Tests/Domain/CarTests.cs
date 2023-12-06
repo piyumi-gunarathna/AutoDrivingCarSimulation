@@ -109,6 +109,6 @@ public class CarTests
     public void Car_CreateInstance_ShouldThrowException_WhenCoordinatesAreNegative()
     {
         // Act & Assert
-        Assert.Throws<AutoDrivingCarSimulationException>(() => new Car(-1, -3, Direction.North));
+        Assert.Throws<AutoDrivingCarException>(() => new Car(-1, -3, Direction.North));
     }
 }

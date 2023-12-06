@@ -13,7 +13,7 @@ public class Car
     {
         if (x < 0 || y < 0)
         {
-            throw new AutoDrivingCarSimulationException(Constants.CAR_POSITION_ERROR);
+            throw new AutoDrivingCarException(Constants.CAR_POSITION_ERROR);
         }
 
         Position = new Coordinates(x, y);
@@ -52,7 +52,7 @@ public class Car
                 int newX = Position.X - 1 >= 0 ? Position.X - 1 : 0;
                 return new Coordinates(newX, Position.Y);
             default:
-                throw new AutoDrivingCarSimulationException(Constants.INVALID_DIRECTION);
+                throw new AutoDrivingCarException(Constants.INVALID_DIRECTION);
         }
     }
 
