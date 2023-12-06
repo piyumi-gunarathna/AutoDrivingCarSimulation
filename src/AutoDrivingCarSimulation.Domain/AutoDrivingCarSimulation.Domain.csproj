@@ -16,4 +16,7 @@
     <Folder Include="ValueObjects\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoDrivingCarSimulation.Shared\AutoDrivingCarSimulation.Shared.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,4 +1,7 @@
-﻿namespace AutoDrivingCarSimulation.Domain.Entities;
+﻿using AutoDrivingCarSimulation.Domain.Exceptions;
+using AutoDrivingCarSimulation.Shared;
+
+namespace AutoDrivingCarSimulation.Domain.Entities;
 
 public class Field
 {
@@ -9,7 +12,7 @@ public class Field
     {
         if (width <= 0 || height <= 0)
         {
-            throw new ArgumentException("Field dimensions must be positive integers.");
+            throw new AutoDrivingCarSimulationException(Constants.FIELD_DIMENSTION_ERROR);
         }
 
         Width = width;

@@ -1,4 +1,6 @@
-﻿using AutoDrivingCarSimulation.Domain.ValueObjects;
+﻿using AutoDrivingCarSimulation.Domain.Exceptions;
+using AutoDrivingCarSimulation.Domain.ValueObjects;
+using AutoDrivingCarSimulation.Shared;
 
 namespace AutoDrivingCarSimulation.Domain.Entities;
 
@@ -9,6 +11,11 @@ public class Car
 
     public Car(int x, int y, Direction facingDirection)
     {
+        if (x <= 0 || y <= 0)
+        {
+            throw new AutoDrivingCarSimulationException(Constants.CAR_POSITION_ERROR);
+        }
+
         Position = new Coordinates(x, y);
         FacingDirection = facingDirection;
     }
@@ -43,7 +50,7 @@ public class Car
             case Direction.West:
                 return new Coordinates(Position.X - 1, Position.Y);
             default:
-                throw new InvalidOperationException("Invalid direction");
+                throw new AutoDrivingCarSimulationException(Constants.INVALID_DIRECTION);
         }
     }
 
@@ -60,8 +67,5 @@ public class Car
             position.Y = field.Height - 1;
         return position;
     }
-
-
-
 }
 

@@ -21,5 +21,9 @@ public static class Constants
     public const string INVALID_INPUT = "Invalid input.";
     public const string ENTER_CAR_STATUS = "Enter car's initial position (X Y Direction):";
     public const string ENTER_COMMANDS = "Enter commands:";
+
+
+    public const string FIELD_DIMENSTION_ERROR = "Field dimensions must be positive integers.";
+    public const string CAR_POSITION_ERROR = "X, Y cordinates must be positive integers.";
 }
 
