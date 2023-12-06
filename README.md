@@ -7,11 +7,11 @@ This project simulates an auto-driving car prototype intended for competition ag
 The auto-driving car prototype possesses limited functionalities:
 
 - Rotations:
--- L: Rotates the car by 90 degrees to the left.
--- R: Rotates the car by 90 degrees to the right.
+- L: Rotates the car by 90 degrees to the left.
+- R: Rotates the car by 90 degrees to the right.
 
 - Movement:
--- F: Moves the car forward by one grid point in the direction it's facing.
+- F: Moves the car forward by one grid point in the direction it's facing.
 
 #### Facing Direction
 The car has a specific facing direction, adhering to the conventional map convention. For example:
