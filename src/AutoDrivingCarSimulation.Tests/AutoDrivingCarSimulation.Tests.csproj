@@ -22,4 +22,16 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Domain\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoDrivingCarSimulation.Application\AutoDrivingCarSimulation.Application.csproj" />
+    <ProjectReference Include="..\AutoDrivingCarSimulation.Domain\AutoDrivingCarSimulation.Domain.csproj" />
+    <ProjectReference Include="..\AutoDrivingCarSimulation.Shared\AutoDrivingCarSimulation.Shared.csproj" />
+    <ProjectReference Include="..\AutoDrivingCarSimulation.ConsoleApp\AutoDrivingCarSimulation.ConsoleApp.csproj" />
+  </ItemGroup>
 </Project>

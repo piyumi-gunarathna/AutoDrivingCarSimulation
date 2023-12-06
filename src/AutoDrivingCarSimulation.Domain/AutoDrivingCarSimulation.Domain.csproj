@@ -9,9 +9,11 @@
   <ItemGroup>
     <None Remove="Entities\" />
     <None Remove="ValueObjects\" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="ValueObjects\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>
