@@ -1,7 +1,7 @@
 ﻿using AutoDrivingCarSimulation.Application.DTOs;
 using AutoDrivingCarSimulation.Application.Services;
 
-namespace AutoDrivingCarSimulation.Tests;
+namespace AutoDrivingCarSimulation.Tests.Application;
 
 public class AutoDrivingServiceTests
 {
