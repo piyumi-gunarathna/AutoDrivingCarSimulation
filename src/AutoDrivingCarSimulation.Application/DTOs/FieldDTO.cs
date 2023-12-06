@@ -3,7 +3,7 @@
 public class FieldDTO
 {
     public int Width { get; set; }
-    public int Hight { get; set; }
+    public int Height { get; set; }
 }
 
 

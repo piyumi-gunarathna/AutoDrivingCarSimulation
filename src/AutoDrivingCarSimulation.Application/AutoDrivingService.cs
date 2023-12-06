@@ -20,7 +20,7 @@ public class AutoDrivingService
     public AutoDrivingService(CarDTO car, FieldDTO field)
     {
         _car = new Car(car.X, car.Y, directionMap[car.Direction]);
-        _field = new Field(field.Hight, field.Width);
+        _field = new Field(field.Height, field.Width);
 
     }
 

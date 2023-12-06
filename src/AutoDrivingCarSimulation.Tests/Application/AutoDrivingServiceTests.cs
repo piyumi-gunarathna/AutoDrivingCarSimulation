@@ -13,7 +13,7 @@ public class AutoDrivingServiceTests
     {
         // Arrange
         var carDto = new CarDTO { X = initialX, Y = initialY, Direction = initialDirection };
-        var fieldDto = new FieldDTO { Width = 10, Hight = 10 };
+        var fieldDto = new FieldDTO { Width = 10, Height = 10 };
         var autoDrivingService = new AutoDrivingService(carDto, fieldDto);
 
         // Act
@@ -31,7 +31,7 @@ public class AutoDrivingServiceTests
     {
         // Arrange
         var carDto = new CarDTO { X = 1, Y = 2, Direction = "N" };
-        var fieldDto = new FieldDTO { Width = 10, Hight = 10 };
+        var fieldDto = new FieldDTO { Width = 10, Height = 10 };
         var autoDrivingService = new AutoDrivingService(carDto, fieldDto);
 
         // Act
