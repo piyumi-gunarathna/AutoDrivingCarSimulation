@@ -1,37 +1,31 @@
-﻿
+﻿using AutoDrivingCarSimulation.Shared;
 
-using System;
-using System.IO;
-using AutoDrivingCarSimulation.Shared;
-using Xunit;
+namespace AutoDrivingCarSimulation.Tests.EndToEnd;
 
-namespace AutoDrivingCarSimulation.Tests.EndToEnd
+public class EndToEndTests
 {
-    public class EndToEndTests
+    [Fact]
+    public void TestEndToEndSimulation()
     {
-        [Fact]
-        public void TestEndToEndSimulation()
+        // Arrange
+        string input = "10 10\n1 2 N\nFFRFFFRRLF\nNo";
+        string expectedOutput = Constants.CAR_STATUS_DETAILS+"\n4 3 S";
+
+        using (StringReader sr = new StringReader(input))
         {
-            // Arrange
-            string input = "10 10\n1 2 N\nFFRFFFRRLF\nNo";
-            string expectedOutput = Constants.CAR_STATUS_DETAILS+"\n4 3 S";
+            Console.SetIn(sr);
+            using StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
 
-            using (StringReader sr = new StringReader(input))
-            {
-                Console.SetIn(sr);
-                using StringWriter sw = new StringWriter();
-                Console.SetOut(sw);
+            // Act
+            var entryPoint = typeof(Program).Assembly.EntryPoint!;
+            entryPoint.Invoke(null, new object[] { Array.Empty<string>() });
+            string consoleOutput = sw.ToString().Trim();
 
-                // Act
-                var entryPoint = typeof(Program).Assembly.EntryPoint!;
-                entryPoint.Invoke(null, new object[] { Array.Empty<string>() });
-                string consoleOutput = sw.ToString().Trim();
-
-                // Assert
-                Assert.Contains(expectedOutput, consoleOutput);
-                Assert.Contains(Constants.DO_YOU_WANT_RESTART, consoleOutput);
-                Assert.Contains(Constants.EXITING, consoleOutput);
-            }
+            // Assert
+            Assert.Contains(expectedOutput, consoleOutput);
+            Assert.Contains(Constants.DO_YOU_WANT_RESTART, consoleOutput);
+            Assert.Contains(Constants.EXITING, consoleOutput);
         }
     }
 }
