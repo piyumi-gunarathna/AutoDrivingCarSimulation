@@ -24,9 +24,11 @@
 
   <ItemGroup>
     <None Remove="Domain\" />
+    <None Remove="Application\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\" />
+    <Folder Include="Application\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoDrivingCarSimulation.Application\AutoDrivingCarSimulation.Application.csproj" />
