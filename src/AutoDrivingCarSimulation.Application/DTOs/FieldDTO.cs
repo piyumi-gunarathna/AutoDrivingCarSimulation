@@ -1,10 +1,9 @@
-﻿namespace AutoDrivingCarSimulation.Application.DTOs;
-
-public class FieldDTO
+﻿namespace AutoDrivingCarSimulation.Application.DTOs
 {
-    public int Width { get; set; }
-    public int Height { get; set; }
+    public class FieldDTO
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+    }
 }
-
-
 

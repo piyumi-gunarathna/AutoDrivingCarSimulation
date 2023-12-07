@@ -8,8 +8,8 @@ do
 {
     try
     {
-        var fieldDTO = InputOutputHandler.GetFieldDimensions();
-        var carDTO = InputOutputHandler.GetCarInitialPosition();
+        FieldDTO? fieldDTO = InputOutputHandler.GetFieldDimensions();
+        CarDTO? carDTO = InputOutputHandler.GetCarInitialPosition();
 
         if (fieldDTO != null && carDTO != null)
         {

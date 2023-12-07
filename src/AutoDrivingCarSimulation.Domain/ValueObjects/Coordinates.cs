@@ -1,14 +1,15 @@
-﻿namespace AutoDrivingCarSimulation.Domain.ValueObjects;
-
-public class Coordinates
+﻿namespace AutoDrivingCarSimulation.Domain.ValueObjects
 {
-    public int X { get; set; }
-    public int Y { get; set; }
-
-    public Coordinates(int x, int y)
+    public class Coordinates
     {
-        X = x;
-        Y = y;
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Coordinates(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }
 

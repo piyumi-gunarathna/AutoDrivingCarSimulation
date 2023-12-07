@@ -1,22 +1,27 @@
 ﻿using AutoDrivingCarSimulation.Domain.Exceptions;
 using AutoDrivingCarSimulation.Shared;
 
-namespace AutoDrivingCarSimulation.Domain.Entities;
-
-public class Field
+namespace AutoDrivingCarSimulation.Domain.Entities
 {
-    public int Width { get; }
-    public int Height { get; }
-
-    public Field(int width, int height)
+    public class Field
     {
-        if (width <= 0 || height <= 0)
+        public int Width { get; }
+        public int Height { get; }
+
+        public Field(int width, int height)
         {
-            throw new AutoDrivingCarException(Constants.FIELD_DIMENSTION_ERROR);
+            ValidateDimensions(width, height);
+
+            Width = width;
+            Height = height;
         }
 
-        Width = width;
-        Height = height;
+        private void ValidateDimensions(int width, int height)
+        {
+            if (width <= 0 || height <= 0)
+            {
+                throw new AutoDrivingCarException(Constants.FIELD_DIMENSION_ERROR);
+            }
+        }
     }
 }
-

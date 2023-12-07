@@ -1,12 +1,12 @@
-﻿
-using AutoDrivingCarSimulation.Shared;
+﻿using AutoDrivingCarSimulation.Shared;
 
-namespace AutoDrivingCarSimulation.Application;
-
-public enum Commands
+namespace AutoDrivingCarSimulation.Application
 {
-    Left = Constants.COMMAND_LEFT,
-    Right = Constants.COMMAND_RIGHT,
-    Forward = Constants.COMMAND_FORWARD
+    public enum Commands
+    {
+        Left = Constants.COMMAND_LEFT,
+        Right = Constants.COMMAND_RIGHT,
+        Forward = Constants.COMMAND_FORWARD
+    }
 }
 

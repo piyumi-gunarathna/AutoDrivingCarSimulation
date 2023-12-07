@@ -10,7 +10,7 @@ public class CarTests
     public void Car_TurnLeft_ShouldChangeDirection()
     {
         // Arrange
-        var car = new Car(0, 0, Direction.North);
+        Car car = new Car(0, 0, Direction.North);
 
         // Act
         car.TurnLeft();
@@ -23,7 +23,7 @@ public class CarTests
     public void Car_TurnRight_ShouldChangeDirection()
     {
         // Arrange
-        var car = new Car(0, 0, Direction.North);
+        Car car = new Car(0, 0, Direction.North);
 
         // Act
         car.TurnRight();
@@ -38,8 +38,8 @@ public class CarTests
     public void Car_MoveForward_ShouldChangePosition(Direction direction, int initialX, int initialY, int expectedX, int expectedY)
     {
         // Arrange
-        var car = new Car(initialX, initialY, direction);
-        var field = new Field(10, 10);
+        Car car = new Car(initialX, initialY, direction);
+        Field field = new Field(10, 10);
 
         // Act
         car.MoveForward(field);
@@ -53,8 +53,8 @@ public class CarTests
     public void Car_MoveForward_ShouldNotMove_WhenInitialPositionYIsZeroAndDirectionIsSouth()
     {
         // Arrange
-        var car = new Car(2, 0, Direction.South);
-        var field = new Field(10, 10);
+        Car car = new Car(2, 0, Direction.South);
+        Field field = new Field(10, 10);
 
         // Act
         car.MoveForward(field);
@@ -81,8 +81,8 @@ public class CarTests
     public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedsFieldWidth()
     {
         // Arrange
-        var car = new Car(9, 1, Direction.South);
-        var field = new Field(10, 10);
+        Car car = new Car(9, 1, Direction.South);
+        Field field = new Field(10, 10);
 
         // Act
         car.MoveForward(field);
@@ -95,8 +95,8 @@ public class CarTests
     public void Car_MoveForward_ShouldNotMove_WhenNewPositionExceedsFieldHeight()
     {
         // Arrange
-        var car = new Car(6, 9, Direction.North);
-        var field = new Field(10, 10);
+        Car car = new Car(6, 9, Direction.North);
+        Field field = new Field(10, 10);
 
         // Act
         car.MoveForward(field);

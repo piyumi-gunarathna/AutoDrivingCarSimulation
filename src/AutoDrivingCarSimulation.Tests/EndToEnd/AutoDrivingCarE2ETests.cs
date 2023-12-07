@@ -9,7 +9,7 @@ public class AutoDrivingCarE2ETests
     {
         // Arrange
         string input = "10 10\n1 2 N\nFFRFFFRRLF\nNo";
-        string expectedOutput = Constants.CAR_STATUS_DETAILS+"\n4 3 S";
+        string expectedOutput = Constants.CAR_STATUS_DETAILS + "\n4 3 S";
 
         using (StringReader sr = new StringReader(input))
         {

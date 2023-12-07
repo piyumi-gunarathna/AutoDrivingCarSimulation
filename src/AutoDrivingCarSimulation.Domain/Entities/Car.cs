@@ -2,68 +2,83 @@
 using AutoDrivingCarSimulation.Domain.ValueObjects;
 using AutoDrivingCarSimulation.Shared;
 
-namespace AutoDrivingCarSimulation.Domain.Entities;
-
-public class Car
+namespace AutoDrivingCarSimulation.Domain.Entities
 {
-    public Coordinates Position { get; private set; }
-    public Direction FacingDirection { get; private set; }
-
-    public Car(int x, int y, Direction facingDirection)
+    public class Car
     {
-        if (x < 0 || y < 0)
+        public Coordinates Position { get; private set; }
+        public Direction FacingDirection { get; private set; }
+
+        public Car(int x, int y, Direction facingDirection)
         {
-            throw new AutoDrivingCarException(Constants.CAR_POSITION_ERROR);
+            ValidateInitialPosition(x, y);
+            Position = new Coordinates(x, y);
+            FacingDirection = facingDirection;
         }
 
-        Position = new Coordinates(x, y);
-        FacingDirection = facingDirection;
-    }
-
-    public void TurnLeft()
-    {
-        FacingDirection = (Direction)(((int)FacingDirection + 3) % 4);
-    }
-
-    public void TurnRight()
-    {
-        FacingDirection = (Direction)(((int)FacingDirection + 1) % 4);
-    }
-
-    public void MoveForward(Field field)
-    {
-        Coordinates newPosition = CalculateNewPosition();
-        newPosition = AdjustPosition(newPosition, field);
-        Position = newPosition;
-    }
-
-    private Coordinates CalculateNewPosition()
-    {
-        switch (FacingDirection)
+        public void TurnLeft()
         {
-            case Direction.North:
-                return new Coordinates(Position.X, Position.Y + 1);
-            case Direction.East:
-                return new Coordinates(Position.X + 1, Position.Y);
-            case Direction.South:
-                int newY = Position.Y - 1 >= 0 ? Position.Y - 1 : 0;
-                return new Coordinates(Position.X, newY);
-            case Direction.West:
-                int newX = Position.X - 1 >= 0 ? Position.X - 1 : 0;
-                return new Coordinates(newX, Position.Y);
-            default:
-                throw new AutoDrivingCarException(Constants.INVALID_DIRECTION);
+            Rotate(-1);
         }
-    }
 
-    private Coordinates AdjustPosition(Coordinates position, Field field)
-    {
-        if (position.X >= field.Width)
-            position.X = field.Width - 1;
+        public void TurnRight()
+        {
+            Rotate(1);
+        }
 
-        if (position.Y >= field.Height)
-            position.Y = field.Height - 1;
-        return position;
+        public void MoveForward(Field field)
+        {
+            Coordinates newPosition = CalculateNewPosition();
+            Position = AdjustPosition(newPosition, field);
+        }
+
+        private void Rotate(int step)
+        {
+            int directionsCount = 4;
+            int newDirectionValue = ((int)FacingDirection + directionsCount + step) % directionsCount;
+            FacingDirection = (Direction)newDirectionValue;
+        }
+
+        private Coordinates CalculateNewPosition()
+        {
+            int newX = Position.X;
+            int newY = Position.Y;
+
+            switch (FacingDirection)
+            {
+                case Direction.North:
+                    newY++;
+                    break;
+                case Direction.East:
+                    newX++;
+                    break;
+                case Direction.South:
+                    newY = newY > 0 ? newY - 1 : 0;
+                    break;
+                case Direction.West:
+                    newX = newX > 0 ? newX - 1 : 0;
+                    break;
+                default:
+                    throw new AutoDrivingCarException(Constants.INVALID_DIRECTION);
+            }
+
+            return new Coordinates(newX, newY);
+        }
+
+        private Coordinates AdjustPosition(Coordinates position, Field field)
+        {
+            int adjustedX = position.X >= field.Width ? field.Width - 1 : position.X;
+            int adjustedY = position.Y >= field.Height ? field.Height - 1 : position.Y;
+
+            return new Coordinates(adjustedX, adjustedY);
+        }
+
+        private void ValidateInitialPosition(int x, int y)
+        {
+            if (x < 0 || y < 0)
+            {
+                throw new AutoDrivingCarException(Constants.CAR_POSITION_ERROR);
+            }
+        }
     }
 }
-

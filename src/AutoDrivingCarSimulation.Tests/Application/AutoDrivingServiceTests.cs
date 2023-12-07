@@ -8,19 +8,19 @@ public class AutoDrivingServiceTests
     [Theory]
     [InlineData(1, 2, "N", "FFRFFFRRLF", 4, 3, "S")]
     public void AutoDrivingService_ProcessCommands_ShouldMoveCarCorrectly(
-        int initialX,int initialY, string initialDirection, string commands,
+        int initialX, int initialY, string initialDirection, string commands,
         int expectedX, int expectedY, string expectedDirection)
     {
         // Arrange
-        var carDto = new CarDTO { X = initialX, Y = initialY, Direction = initialDirection };
-        var fieldDto = new FieldDTO { Width = 10, Height = 10 };
-        var autoDrivingService = new AutoDrivingService(carDto, fieldDto);
+        CarDTO carDto = new CarDTO { X = initialX, Y = initialY, Direction = initialDirection };
+        FieldDTO fieldDto = new FieldDTO { Width = 10, Height = 10 };
+        AutoDrivingService autoDrivingService = new AutoDrivingService(carDto, fieldDto);
 
         // Act
         autoDrivingService.ProcessCommands(commands);
+        var movedCarInfo = autoDrivingService.GetCarStatus();
 
         // Assert
-        var movedCarInfo = autoDrivingService.GetCarStatus();
         Assert.Equal(expectedX, movedCarInfo.X);
         Assert.Equal(expectedY, movedCarInfo.Y);
         Assert.Equal(expectedDirection, movedCarInfo.Direction);
@@ -30,9 +30,9 @@ public class AutoDrivingServiceTests
     public void AutoDrivingService_GetCar_ShouldReturnInitialCarInfo()
     {
         // Arrange
-        var carDto = new CarDTO { X = 1, Y = 2, Direction = "N" };
-        var fieldDto = new FieldDTO { Width = 10, Height = 10 };
-        var autoDrivingService = new AutoDrivingService(carDto, fieldDto);
+        CarDTO carDto = new CarDTO { X = 1, Y = 2, Direction = "N" };
+        FieldDTO fieldDto = new FieldDTO { Width = 10, Height = 10 };
+        AutoDrivingService autoDrivingService = new AutoDrivingService(carDto, fieldDto);
 
         // Act
         var carInfo = autoDrivingService.GetCarStatus();

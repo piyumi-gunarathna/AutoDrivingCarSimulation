@@ -3,13 +3,13 @@ using AutoDrivingCarSimulation.Domain.Entities;
 using AutoDrivingCarSimulation.Domain.ValueObjects;
 using AutoDrivingCarSimulation.Shared;
 
-namespace AutoDrivingCarSimulation.Application.Services;
-
-public class AutoDrivingService
+namespace AutoDrivingCarSimulation.Application.Services
 {
-    private readonly Field _field;
-    private readonly Car _car;
-    private static readonly Dictionary<string, Direction> directionMap = new Dictionary<string, Direction>
+    public class AutoDrivingService
+    {
+        private readonly Field _field;
+        private readonly Car _car;
+        private static readonly Dictionary<string, Direction> directionMap = new Dictionary<string, Direction>
         {
             { Constants.DIRECTION_NORTH, Direction.North },
             { Constants.DIRECTION_EAST, Direction.East },
@@ -17,18 +17,35 @@ public class AutoDrivingService
             { Constants.DIRECTION_WEST, Direction.West }
         };
 
-    public AutoDrivingService(CarDTO car, FieldDTO field)
-    {
-        _car = new Car(car.X, car.Y, directionMap[car.Direction]);
-        _field = new Field(field.Height, field.Width);
-
-    }
-
-    public void ProcessCommands(string commands)
-    {
-        foreach (char command in commands)
+        public AutoDrivingService(CarDTO car, FieldDTO field)
         {
-            switch ((Commands)command)
+            _car = new Car(car.X, car.Y, directionMap[car.Direction]);
+            _field = new Field(field.Height, field.Width);
+        }
+
+        public void ProcessCommands(string commands)
+        {
+            foreach (char command in commands)
+            {
+                ExecuteCommand((Commands)command);
+            }
+        }
+
+        public CarDTO GetCarStatus()
+        {
+            string facingDirection = GetFacingDirection();
+
+            return new CarDTO
+            {
+                X = _car.Position.X,
+                Y = _car.Position.Y,
+                Direction = facingDirection
+            };
+        }
+
+        private void ExecuteCommand(Commands command)
+        {
+            switch (command)
             {
                 case Commands.Forward:
                     _car.MoveForward(_field);
@@ -39,20 +56,14 @@ public class AutoDrivingService
                 case Commands.Right:
                     _car.TurnRight();
                     break;
+                default:
+                    break;
             }
         }
-    }
 
-    public CarDTO GetCarStatus()
-    {
-        var facingDirection = directionMap.FirstOrDefault(x => x.Value == _car.FacingDirection).Key;
-
-        return new CarDTO
+        private string GetFacingDirection()
         {
-            X = _car.Position.X,
-            Y = _car.Position.Y,
-            Direction = facingDirection
-        };
+            return directionMap.FirstOrDefault(x => x.Value == _car.FacingDirection).Key;
+        }
     }
-
 }

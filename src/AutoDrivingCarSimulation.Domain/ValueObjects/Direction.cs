@@ -1,10 +1,11 @@
-﻿namespace AutoDrivingCarSimulation.Domain.ValueObjects;
-
-public enum Direction
+﻿namespace AutoDrivingCarSimulation.Domain.ValueObjects
 {
-    North,
-    East,
-    South,
-    West
+    public enum Direction
+    {
+        North,
+        East,
+        South,
+        West
+    }
 }
 
